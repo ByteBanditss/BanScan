@@ -1,0 +1,62 @@
+#!/bin/bash
+
+GREEN='\033[0;32m'
+CYAN='\033[0;36m'
+NC='\033[0m' # Sem cor
+
+# Exibe o prompt para inserir o alvo
+echo -e "${CYAN}Insira o alvo:${NC}"
+
+# Lê a entrada do usuário para o alvo
+read ALVO
+
+#Saida de Arquivo
+
+saida="infoScan.txt"
+
+#Limpa os antigo
+clear
+
+# Exibe o layout com o alvo
+echo -e "${GREEN}  - Alvo: ${ALVO}${NC}"
+echo "  "
+
+# Function Loading
+SPINNER="/-\|"
+
+# Define o tempo de espera entre cada quadro (em segundos)
+DELAY=0.1
+
+# Inicia a animação de carregamento em segundo plano
+animate_loading() {
+    while :; do
+        for i in $(seq 0 3); do
+            echo -ne "\r[${SPINNER:$i:1}] Carregando..."
+            sleep $DELAY
+        done
+    done
+}
+
+# Inicia a animação de carregamento em segundo plano
+animate_loading &
+
+# Armazena o PID da animação de carregamento
+ANIMATION_PID=$!
+
+# Seu código de escaneamento aqui
+nmap -Pn  $ALVO > $saida
+# Aguarde um tempo (simulação)
+sleep 5
+
+# Pare o carregamento
+kill $!
+
+clear
+
+#Mostra o Resultado
+echo -e "${GREEN}  - Alvo: ${ALVO}${NC}"
+echo "  "
+cat infoScan.txt
+echo "  "
+###############
+echo -e "${CYAN} Escaneamento concluido!"
