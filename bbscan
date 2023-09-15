@@ -2,7 +2,8 @@
 clear
 RED='\e[31m'
 GREEN='\033[0;32m'
-CYAN='\033[0;36m'                                                 NC='\033[0m' # Sem cor
+CYAN='\033[0;36m'                                                 
+NC='\033[0m' # Sem cor
                                                                   # Exibe o prompt para inserir o alvo
 echo -e "       ${CYAN}Insira o alvo:   ${NC}"                    
 # Lê a entrada do usuário para o alvo                             read ALVO
