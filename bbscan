@@ -1,8 +1,4 @@
-#!/bin/bash                                                       
-# Função para verificar se o Nmap está instalado                  check_nmap() {
-    if command -v nmap &> /dev/null; then                                 echo "Nmap está instalado."
-    else                                                                  echo "Nmap não está instalado. Iniciando a instalação..."
-        sudo apt-get update                                               sudo apt-get install -y nmap  # Você pode ajustar isso para sua distr                                                       clear
+#!/bin/bash                                                                                                      sudo apt-get install -y nmap  # Você pode ajustar isso para sua distr                                                       clear
 RED='\e[31m'
 GREEN='\033[0;32m'
 CYAN='\033[0;36m'                                                 NC='\033[0m' # Sem cor
