@@ -6,7 +6,8 @@ CYAN='\033[0;36m'
 NC='\033[0m' # Sem cor
                                                                   # Exibe o prompt para inserir o alvo
 echo -e "       ${CYAN}Insira o alvo:   ${NC}"                    
-# Lê a entrada do usuário para o alvo                             read ALVO
+# Lê a entrada do usuário para o alvo                             
+read ALVO
                                                                   # Verifique se a entrada contém apenas números e caracteres especiais                                                                   if [[ ! "$ALVO" =~ ^[0-9[:punct:]]+$ ]]; then
 echo "  "
         echo -e "${RED}A entrada deve conter apenas números | formato: 127.0.0.1${NC}"
