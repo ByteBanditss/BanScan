@@ -5,58 +5,121 @@ CYAN='\033[0;36m'
 NC='\033[0m' # Sem cor
 
 # Exibe o prompt para inserir o alvo
-echo -e "${CYAN}Insira o alvo:${NC}"
+echo -e "	${CYAN}Insira o alvo:${NC}"
 
-# Lê a entrada do usuário para o alvo
+# LÃª a entrada do usuÃ¡rio para o alvo
 read ALVO
 
 #Saida de Arquivo
 
-saida="infoScan.txt"
+saida=".infscan.txt"
 
 #Limpa os antigo
 clear
 
-# Exibe o layout com o alvo
-echo -e "${GREEN}  - Alvo: ${ALVO}${NC}"
-echo "  "
+#escolha 
 
-# Function Loading
-SPINNER="/-\|"
+while true; do
+	echo -e "	${CYAN}Menu - ByteBandits Inc.${NC}"
+	echo ""
+	echo "1) Scan normal"
+	echo "2) Scan agressivo"
+	echo "99) Sair"
+	echo ""
+	read escolha
+	clear
+	case "$escolha" in
+	
+	1)
+	
+	clear
+		# Function Loading
+	SPINNER="/-\|"
 
-# Define o tempo de espera entre cada quadro (em segundos)
-DELAY=0.1
+	# Define o tempo de espera entre cada quadro (em segundos)
+	DELAY=0.1
 
-# Inicia a animação de carregamento em segundo plano
-animate_loading() {
-    while :; do
-        for i in $(seq 0 3); do
-            echo -ne "\r[${SPINNER:$i:1}] Carregando..."
-            sleep $DELAY
-        done
-    done
-}
+	# Inicia a animaÃ§Ã£o de carregamento em segundo plano
+	animate_loading() {
+	    while :; do
+	        for i in $(seq 0 3); do
+	            echo -ne "\r[${SPINNER:$i:1}] Carregando..."
+	            sleep $DELAY
+	        done
+	    done
+	}
 
-# Inicia a animação de carregamento em segundo plano
-animate_loading &
+	# Inicia a animaÃ§Ã£o de carregamento em segundo plano
+	animate_loading &
 
-# Armazena o PID da animação de carregamento
-ANIMATION_PID=$!
+	# Armazena o PID da animaÃ§Ã£o de carregamento
+	ANIMATION_PID=$!
 
-# Seu código de escaneamento aqui
-nmap -Pn  $ALVO > $saida
-# Aguarde um tempo (simulação)
-sleep 5
+	# Seu cÃ³digo de escaneamento aqui
+	nmap -T4 -F -Pn $ALVO > $saida
 
-# Pare o carregamento
-kill $!
+	# Aguarde um tempo (simulaÃ§Ã£o)
+	sleep 5
 
-clear
+	# Pare o carregamento
+	kill $!
 
-#Mostra o Resultado
-echo -e "${GREEN}  - Alvo: ${ALVO}${NC}"
-echo "  "
-cat infoScan.txt
-echo "  "
-###############
-echo -e "${CYAN} Escaneamento concluido!"
+	clear
+	echo -e "${GREEN}  - Alvo: ${ALVO}${NC}"
+	echo "  "
+	cat $saida
+	echo "  "
+	echo -e "${CYAN} Escaneamento concluido!"
+	break
+	;;
+
+	2)
+	
+	clear
+		# Function Loading
+	SPINNER="/-\|"
+
+	# Define o tempo de espera entre cada quadro (em segundos)
+	DELAY=0.1
+
+	# Inicia a animaÃ§Ã£o de carregamento em segundo plano
+	animate_loading() {
+	    while :; do
+	        for i in $(seq 0 3); do
+	            echo -ne "\r[${SPINNER:$i:1}] Carregando..."
+	            sleep $DELAY
+	        done
+	    done
+	}
+
+	# Inicia a animaÃ§Ã£o de carregamento em segundo plano
+	animate_loading &
+
+	# Armazena o PID da animaÃ§Ã£o de carregamento
+	ANIMATION_PID=$!
+
+	# Seu cÃ³digo de escaneamento aqui
+	nmap -Pn -A -T4 -p- -v $ALVO > $saida
+
+	# Aguarde um tempo (simulaÃ§Ã£o)
+	sleep 5
+
+	# Pare o carregamento
+	kill $!
+
+	clear
+	echo -e "${GREEN}  - Alvo: ${ALVO}${NC}"
+	echo "  "
+	cat $saida
+	echo "  "
+	echo -e "${CYAN} Escaneamento concluido!"
+	break
+	;;
+	
+
+	99)
+	break
+	;;
+
+esac
+done
